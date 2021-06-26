@@ -1,6 +1,6 @@
 FROM python:3.8-slim
 
 # Install dependencies
-RUN pip install scrapy
+RUN pip install scrapy pytz
 
-CMD python /app/main.py
+CMD python -u /app/main.py
