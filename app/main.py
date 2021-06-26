@@ -26,7 +26,9 @@ if __name__=="__main__":
         if current_time >= action_time and not EXECUTED:
             print("should run")
             quote = gather.get_quote()
+            print(quote)
             EXECUTED = True
+            gather.IMG = not gather.IMG
         elif current_time >= action_time and EXECUTED:
             print("already ran")
         elif current_time <= reset_time:
