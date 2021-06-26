@@ -17,9 +17,10 @@ class QuotesSpider(scrapy.Spider):
             for quote in response.css('div.quote'):
                 if quote.css('span.text::text').get() != None:
                     return {
-                        'text': quote.css('span.text::text').get(),
-                        'author': quote.css('small.author::text').get(),
-                        # 'tags': quote.css('div.tags a.tag::text').getall(),
+                        'title': ", ".join(quote.css('div.tags a.tag::text').getall()),
+                        'text': " ".join([quote.css('span.text::text').get(),
+                                    " by, ",
+                                    quote.css('small.author::text').get()]),
                         'img': None
                     }
         except BaseException:
@@ -29,7 +30,8 @@ class QuotesSpider(scrapy.Spider):
             # Img
             for quote in response.css('div.daily-post'):
                 return {
-                    'text': quote.css('h2.entry-title::text').get(),
+                    'title': quote.css('h2.entry-title::text').get(),
+                    'text': None,
                     'img': quote.css('div.quote a p img::attr(src)').extract()
                 }
         except BaseException:
