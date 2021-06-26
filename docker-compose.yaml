@@ -1,9 +1,9 @@
 version: "3.2"
 services:
   main:
-    image: quote-scraper:latest
+    image: nickumia/quote-scraper:latest
     build:
-      context: .
+      context: quotes
     working_dir: /app
     volumes:
       - ./app:/app
