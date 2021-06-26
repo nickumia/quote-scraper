@@ -1,12 +1,12 @@
 version: "3.2"
 services:
   quotes:
-    image: nickumia/quote-scraper:latest
+    image: nickumia/quote-server:latest
     build:
       context: quotes
     working_dir: /app
-    depends_on:
-      - "mail"
+    ports:
+      - "5555:5555"
     volumes:
       - ./app:/app
 
@@ -17,5 +17,16 @@ services:
     working_dir: /app
     ports:
       - "4444:4444"
+    volumes:
+      - ./app:/app
+
+  scheduler:
+    image: nickumia/scheduler:latest
+    build:
+      context: scheduler
+    depends_on:
+      - "mail"
+      - "quotes"
+    working_dir: /app
     volumes:
       - ./app:/app
