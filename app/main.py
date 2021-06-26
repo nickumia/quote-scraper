@@ -3,7 +3,9 @@
 
 
 from datetime import datetime
+import json
 import pytz
+import socket
 import time
 
 import gather
@@ -12,6 +14,13 @@ import sender
 EXECUTED = False
 
 if __name__=="__main__":
+    print("Quote Scraper UP")
+
+    quote = gather.get_quote()
+    s = socket.socket()
+    s.connect(('mail', 4444))
+    s.send(json.dumps(quote).encode('utf-8'))
+    s.close()
 
     while True:
         time.sleep(5)
