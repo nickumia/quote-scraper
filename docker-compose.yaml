@@ -1,0 +1,11 @@
+version: "3.2"
+services:
+  main:
+    image: quote-scraper:latest
+    build:
+      context: .
+    working_dir: /app
+    volumes:
+      - ./app:/app
+
+
