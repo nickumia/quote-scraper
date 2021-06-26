@@ -14,6 +14,7 @@ BOT_NAME = 'gather_quotes'
 SPIDER_MODULES = ['gather_quotes.spiders']
 NEWSPIDER_MODULE = 'gather_quotes.spiders'
 
+LOG_LEVEL = 'WARNING'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'gather_quotes (+http://www.yourdomain.com)'
