@@ -6,6 +6,7 @@ import json
 import socket
 
 import notif
+import safe
 
 
 Mailer = notif.Notifications()
@@ -21,8 +22,10 @@ if __name__ == "__main__":
         request = connection.recv(2048)
         request_struct = json.loads(request)
         connection.close()
-        Mailer.phoneNotify(None,
-                            request_struct['title'],
-                            (lambda: request_struct['text'] if 
-                                request_struct['text'] != None else 
-                                request_struct['img'][0])())
+
+        for user in safe.people:
+            Mailer.phoneNotify(user,
+                                request_struct['title'],
+                                (lambda: request_struct['text'] if 
+                                    request_struct['text'] != None else 
+                                    request_struct['img'][0])())
