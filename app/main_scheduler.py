@@ -9,13 +9,14 @@ import random
 import socket
 import time
 
-EXECUTED = False
+EXECUTED = open("executed", "r").read() == 'True\n'
 
 if __name__ == "__main__":
     print("Scheduler UP")
     random.seed()
 
     while True:
+        open("executed", "w").write(str(EXECUTED)+"\n")
         time.sleep(5)
         current_time = datetime.now().astimezone(
                         pytz.timezone('US/Eastern'))
