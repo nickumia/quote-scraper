@@ -3,11 +3,13 @@
 # This file contains a class used to send legit emails from a legit source
 
 
-import smtplib
+from email import encoders
+from email.mime.base import MIMEBase
+from email.mime.image import MIMEImage
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-from email.mime.base import MIMEBase
-from email import encoders
+import wget
+import smtplib
 
 
 google_fi = "@msg.fi.google.com";
@@ -110,7 +112,13 @@ class SendMail( object ):
             msg['From'] = self.FROM;
             msg['To'] = self.TO;
             msg['Subject'] = self.SUBJECT;
-            msg.attach(MIMEText(self.BODY, 'plain'));
+            try:
+                wget.download(self.BODY, '/tmp/quote')
+                with open('/tmp/quote', 'rb') as f:
+                    img_data = f.read()
+                msg.attach(MIMEImage(img_data, name=self.BODY))
+            except:
+                msg.attach(MIMEText(self.BODY, 'plain'));
 
             text = msg.as_string();
             server.sendmail(self.FROM, self.TO, text);
