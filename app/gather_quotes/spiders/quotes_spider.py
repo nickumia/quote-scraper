@@ -7,25 +7,10 @@ import scrapy
 class QuotesSpider(scrapy.Spider):
     name = "quotes"
     start_urls = [
-        'https://quotes.toscrape.com/',
+        'https://www.insightoftheday.com/'
     ]
 
     def parse(self, response):
-
-        try:
-            # Text
-            for quote in response.css('div.quote'):
-                if quote.css('span.text::text').get() != None:
-                    return {
-                        'title': ", ".join(quote.css('div.tags a.tag::text').getall()),
-                        'text': " ".join([quote.css('span.text::text').get(),
-                                    " by, ",
-                                    quote.css('small.author::text').get()]),
-                        'img': None
-                    }
-        except BaseException:
-            pass
-
         try:
             # Img
             for quote in response.css('div.daily-post'):

@@ -29,9 +29,10 @@ if __name__ == "__main__":
             # print("should run")
             s = socket.socket()
             s.connect(('quotes', 5555))
-            s.send((lambda: "img" if 
-                        random.randint(1,1024) % 2 == 0 else "none")()
-                        .encode("utf-8"))
+            #s.send((lambda: "img" if 
+            #            random.randint(1,1024) % 2 == 0 else "none")()
+            #            .encode("utf-8"))
+            s.send('img'.encode("utf-8"))
             quote = s.recv(4096)
             s.close()
             s = socket.socket()
